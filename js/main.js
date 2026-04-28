@@ -28,7 +28,7 @@ function updateKPI(data) {
   // Animación de conteo para KPI
   animateValue('kpiQuestions', 0, questions.length, 500);
   animateValue('kpiFacility', 0, Math.round(avgFac * 100), 500, '%');
-  animateValue('kpiDisc', 0, avgDisc, 500, '', 2);
+  animateValue('kpiDisc', 0, Math.round(avgDisc * 100), 500, '', 2);
   animateValue('kpiCritical', 0, criticalCount, 500);
 }
 
