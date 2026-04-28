@@ -1,0 +1,161 @@
+{
+  "course": "6° A - Prueba",
+  "quizName": "Quiz Statistics Report",
+  "generatedAt": "2026-04-27T08:00:00-05:00",
+  "summary": {
+    "attempts": 148,
+    "avgFacility": 0.64,
+    "avgStdDev": 0.21,
+    "avgRandomScore": 0.18,
+    "avgPredictedWeight": 0.2,
+    "avgEffectiveWeight": 0.19,
+    "avgDiscrimination": 0.31,
+    "avgDiscriminativeEfficiency": 0.27
+  },
+  "questions": [
+    {
+      "q": 1,
+      "name": "Conceptos básicos de Moodle",
+      "attempts": 146,
+      "facility": 0.82,
+      "stdDev": 0.12,
+      "randomScore": 0.06,
+      "predictedWeight": 0.1,
+      "effectiveWeight": 0.11,
+      "discrimination": 0.41,
+      "efficiency": 0.38
+    },
+    {
+      "q": 2,
+      "name": "Selección múltiple avanzada",
+      "attempts": 144,
+      "facility": 0.71,
+      "stdDev": 0.18,
+      "randomScore": 0.1,
+      "predictedWeight": 0.1,
+      "effectiveWeight": 0.09,
+      "discrimination": 0.36,
+      "efficiency": 0.31
+    },
+    {
+      "q": 3,
+      "name": "Cálculo de promedios",
+      "attempts": 142,
+      "facility": 0.63,
+      "stdDev": 0.23,
+      "randomScore": 0.16,
+      "predictedWeight": 0.12,
+      "effectiveWeight": 0.13,
+      "discrimination": 0.44,
+      "efficiency": 0.4
+    },
+    {
+      "q": 4,
+      "name": "Interpretación de gráficos",
+      "attempts": 147,
+      "facility": 0.58,
+      "stdDev": 0.27,
+      "randomScore": 0.19,
+      "predictedWeight": 0.1,
+      "effectiveWeight": 0.1,
+      "discrimination": 0.29,
+      "efficiency": 0.24
+    },
+    {
+      "q": 5,
+      "name": "Preguntas de relación",
+      "attempts": 141,
+      "facility": 0.49,
+      "stdDev": 0.29,
+      "randomScore": 0.22,
+      "predictedWeight": 0.1,
+      "effectiveWeight": 0.12,
+      "discrimination": 0.21,
+      "efficiency": 0.19
+    },
+    {
+      "q": 6,
+      "name": "Aplicación de fórmulas",
+      "attempts": 139,
+      "facility": 0.37,
+      "stdDev": 0.31,
+      "randomScore": 0.28,
+      "predictedWeight": 0.12,
+      "effectiveWeight": 0.13,
+      "discrimination": 0.12,
+      "efficiency": 0.1
+    },
+    {
+      "q": 7,
+      "name": "Lectura de indicadores",
+      "attempts": 145,
+      "facility": 0.75,
+      "stdDev": 0.15,
+      "randomScore": 0.08,
+      "predictedWeight": 0.09,
+      "effectiveWeight": 0.08,
+      "discrimination": 0.34,
+      "efficiency": 0.3
+    },
+    {
+      "q": 8,
+      "name": "Uso de cuestionarios",
+      "attempts": 143,
+      "facility": 0.54,
+      "stdDev": 0.25,
+      "randomScore": 0.2,
+      "predictedWeight": 0.11,
+      "effectiveWeight": 0.1,
+      "discrimination": 0.18,
+      "efficiency": 0.16
+    },
+    {
+      "q": 9,
+      "name": "Casos prácticos",
+      "attempts": 138,
+      "facility": 0.46,
+      "stdDev": 0.3,
+      "randomScore": 0.24,
+      "predictedWeight": 0.13,
+      "effectiveWeight": 0.15,
+      "discrimination": 0.09,
+      "efficiency": 0.07
+    },
+    {
+      "q": 10,
+      "name": "Diagnóstico y mejora",
+      "attempts": 140,
+      "facility": 0.67,
+      "stdDev": 0.2,
+      "randomScore": 0.12,
+      "predictedWeight": 0.13,
+      "effectiveWeight": 0.12,
+      "discrimination": 0.39,
+      "efficiency": 0.35
+    },
+    {
+      "q": 11,
+      "name": "Análisis de errores",
+      "attempts": 137,
+      "facility": 0.42,
+      "stdDev": 0.28,
+      "randomScore": 0.26,
+      "predictedWeight": 0.09,
+      "effectiveWeight": 0.11,
+      "discrimination": 0.05,
+      "efficiency": 0.03
+    },
+    {
+      "q": 12,
+      "name": "Pregunta crítica",
+      "attempts": 135,
+      "facility": 0.33,
+      "stdDev": 0.33,
+      "randomScore": 0.31,
+      "predictedWeight": 0.08,
+      "effectiveWeight": 0.1,
+      "discrimination": -0.04,
+      "efficiency": -0.02
+    }
+  ]
+}
