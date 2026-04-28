@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Órbita | Dashboard de Análisis de Quiz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,33 +16,103 @@
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="brand"><div class="brand-badge">o</div><div>Órbita</div></div>
+    <div class="brand">
+      <div class="brand-badge">⚡</div>
+      <div>Órbita</div>
+    </div>
     <div class="pill" id="coursePill">Colegio Pruebas 1</div>
     <div class="avatar">PR</div>
   </div>
 </header>
+
 <main class="page" id="dashboard">
   <div class="toolbar">
-    <div><h1>Dashboard de Análisis del Quiz</h1><div style="color:#64748b;">Vista resumida · Exporta el informe completo en PDF</div></div>
-    <div style="display:flex;gap:12px;"><button class="btn btn-secondary" id="refreshBtn">↻ Actualizar</button><button class="btn btn-primary" id="exportBtn">⬇ Exportar informe completo PDF</button></div>
+    <div class="title-section">
+      <h1>Dashboard de Análisis del Quiz</h1>
+      <div class="subtitle">Vista resumida · Indicadores clave y métricas de rendimiento</div>
+    </div>
+    <div class="action-buttons">
+      <button class="btn btn-secondary" id="refreshBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        Actualizar
+      </button>
+      <button class="btn btn-primary" id="exportBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Exportar PDF
+      </button>
+    </div>
   </div>
+
   <div class="grid-kpis" id="kpiGrid">
-    <div class="card"><div class="kpi-label">Preguntas</div><div class="kpi-value" id="kpiQuestions">—</div><div class="trend good">Dataset cargado</div></div>
-    <div class="card"><div class="kpi-label">Facilidad</div><div class="kpi-value" id="kpiFacility">—%</div><div class="trend warn" id="trendFacility">Balance medio</div></div>
-    <div class="card"><div class="kpi-label">Discriminación</div><div class="kpi-value" id="kpiDisc">—</div><div class="trend good" id="trendDisc">Buena separación</div></div>
-    <div class="card"><div class="kpi-label">Críticas</div><div class="kpi-value" id="kpiCritical">—</div><div class="trend bad" id="trendCritical">Atención prioritaria</div></div>
+    <div class="card animate-slide-up" style="animation-delay: 0s">
+      <div class="kpi-icon">📊</div>
+      <div class="kpi-label">Total Preguntas</div>
+      <div class="kpi-value" id="kpiQuestions">—</div>
+      <div class="trend good">Dataset cargado</div>
+    </div>
+    <div class="card animate-slide-up" style="animation-delay: 0.05s">
+      <div class="kpi-icon">📈</div>
+      <div class="kpi-label">Facilidad Promedio</div>
+      <div class="kpi-value" id="kpiFacility">—%</div>
+      <div class="trend warn" id="trendFacility">Balance medio</div>
+    </div>
+    <div class="card animate-slide-up" style="animation-delay: 0.1s">
+      <div class="kpi-icon">🎯</div>
+      <div class="kpi-label">Discriminación</div>
+      <div class="kpi-value" id="kpiDisc">—</div>
+      <div class="trend good" id="trendDisc">Buena separación</div>
+    </div>
+    <div class="card animate-slide-up" style="animation-delay: 0.15s">
+      <div class="kpi-icon">⚠️</div>
+      <div class="kpi-label">Preguntas Críticas</div>
+      <div class="kpi-value" id="kpiCritical">—</div>
+      <div class="trend bad" id="trendCritical">Atención prioritaria</div>
+    </div>
   </div>
+
   <div class="charts-grid">
-    <div class="chart-box"><h3>Facilidad vs Discriminación</h3><div class="chart-wrap"><canvas id="scatterChart"></canvas></div></div>
-    <div class="chart-box"><h3>Calidad de preguntas</h3><div class="chart-wrap"><canvas id="qualityChart"></canvas></div></div>
-    <div class="chart-box"><h3>Discriminación por ítem</h3><div class="chart-wrap"><canvas id="discriminationChart"></canvas></div></div>
-    <div class="chart-box"><h3>Facilidad por pregunta</h3><div class="chart-wrap"><canvas id="facilityChart"></canvas></div></div>
+    <div class="chart-box animate-fade-in">
+      <h3>📉 Facilidad vs Discriminación</h3>
+      <div class="chart-wrap"><canvas id="scatterChart"></canvas></div>
+    </div>
+    <div class="chart-box animate-fade-in">
+      <h3>🥧 Calidad de preguntas</h3>
+      <div class="chart-wrap"><canvas id="qualityChart"></canvas></div>
+    </div>
+    <div class="chart-box animate-fade-in">
+      <h3>📊 Discriminación por ítem</h3>
+      <div class="chart-wrap"><canvas id="discriminationChart"></canvas></div>
+    </div>
+    <div class="chart-box animate-fade-in">
+      <h3>📏 Facilidad por pregunta</h3>
+      <div class="chart-wrap"><canvas id="facilityChart"></canvas></div>
+    </div>
   </div>
-  <div class="table-wrap"><table id="mainTable"><thead><tr><th>#</th><th>Nombre</th><th>Intentos</th><th>Facilidad</th><th>Discriminación</th><th>Estado</th></tr></thead><tbody id="simpleTableBody"></tbody></table></div>
-  <div class="footer-note" style="margin-top:12px;color:#64748b;">* El informe PDF contiene análisis completo con todos los indicadores y gráficos avanzados.</div>
+
+  <div class="table-container">
+    <div class="table-header">
+      <h3>📋 Análisis detallado de preguntas</h3>
+      <span class="table-badge" id="tableCount">0 preguntas</span>
+    </div>
+    <div class="table-wrap">
+      <table id="mainTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Intentos</th>
+            <th>Facilidad</th>
+            <th>Discriminación</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="simpleTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footer-note">* El informe PDF contiene análisis completo con todos los indicadores y gráficos avanzados.</div>
 </main>
 
-<!-- Contenedores ocultos para generar gráficos del PDF (se llenan dinámicamente) -->
 <div id="pdfCanvasContainer" style="display:none;"></div>
 
 <script type="module" src="js/main.js"></script>
