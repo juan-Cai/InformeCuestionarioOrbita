@@ -3,6 +3,7 @@ import { loadData, getCurrentData } from './data.js';
 import { generateFullPDF } from './pdf.js';
 
 let mainCharts = {};
+let resizeTimeout = null;
 
 // Registrar plugin de datalabels para mostrar porcentajes
 Chart.register(ChartDataLabels);
@@ -18,6 +19,24 @@ Chart.defaults.set('plugins.datalabels', {
   align: 'center',
   offset: 4
 });
+
+// Función para redimensionar todos los gráficos de forma eficiente
+function resizeAllCharts() {
+  if (!mainCharts) return;
+  Object.values(mainCharts).forEach(chart => {
+    if (chart && typeof chart.resize === 'function') {
+      chart.resize();
+    }
+  });
+}
+
+// Manejo de redimensionamiento con debounce
+function handleWindowResize() {
+  if (resizeTimeout) clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    resizeAllCharts();
+  }, 150);
+}
 
 function updateKPI(data) {
   const questions = data.questions;
@@ -76,7 +95,7 @@ function updateTable(data) {
           </div>
           <span class="progress-value">${facilityPercent}%</span>
         </div>
-      </td>
+       </td>
       <td>
         <div class="progress-bar-container" data-tooltip="Discriminación: ${discValue}">
           <div class="progress-bar-bg">
@@ -84,7 +103,7 @@ function updateTable(data) {
           </div>
           <span class="progress-value">${discValue}</span>
         </div>
-      </td>
+       </td>
       <td><span class="status-badge ${statusClass}">${status}</span></td>
     `;
     tbody.appendChild(row);
@@ -142,6 +161,7 @@ function renderMainCharts(questions) {
     options: { 
       cutout: '65%', 
       responsive: true,
+      maintainAspectRatio: true,
       plugins: {
         legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 10, font: { size: 11 } } },
         datalabels: { 
@@ -168,6 +188,7 @@ function renderMainCharts(questions) {
     options: { 
       indexAxis: 'y', 
       responsive: true,
+      maintainAspectRatio: true,
       plugins: { 
         tooltip: { callbacks: { label: (ctx) => `Discriminación: ${ctx.raw.toFixed(3)}` } },
         datalabels: { 
@@ -188,7 +209,8 @@ function renderMainCharts(questions) {
     type: 'bar',
     data: { labels: sorted.map(q => `Q${q.q}`), datasets: [{ label: 'Facilidad', data: sorted.map(q => q.facility), backgroundColor: '#f27a4b', borderRadius: 8, barPercentage: 0.6 }] },
     options: { 
-      responsive: true, 
+      responsive: true,
+      maintainAspectRatio: true,
       scales: { y: { min: 0, max: 1, title: { display: true, text: 'Facilidad', font: { weight: 'bold' } }, ticks: { callback: (val) => `${Math.round(val * 100)}%` } } },
       plugins: { 
         tooltip: { callbacks: { label: (ctx) => `Facilidad: ${(ctx.raw * 100).toFixed(1)}%` } },
@@ -214,10 +236,14 @@ async function refreshDashboard() {
     const data = await loadData();
     if (!data) return;
     
-    document.getElementById('coursePill').innerText = data.course || 'Curso Demo';
     updateKPI(data);
     updateTable(data);
     renderMainCharts(data.questions);
+    
+    // Forzar un redimensionado inicial después de renderizar (evita cortes)
+    setTimeout(() => {
+      resizeAllCharts();
+    }, 100);
   } catch (error) {
     console.error('Error al refrescar el dashboard:', error);
     const tbody = document.getElementById('simpleTableBody');
@@ -226,10 +252,10 @@ async function refreshDashboard() {
 }
 
 // Event listeners
-document.getElementById('refreshBtn').addEventListener('click', refreshDashboard);
 document.getElementById('exportBtn').addEventListener('click', generateFullPDF);
+window.addEventListener('resize', handleWindowResize);
 
-// Inicializar con animación
+// Inicializar con animación y asegurar redimensionado
 document.addEventListener('DOMContentLoaded', () => {
   refreshDashboard();
 });

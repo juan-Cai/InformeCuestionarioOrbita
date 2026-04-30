@@ -315,7 +315,7 @@ body {
   color: #b12f2f;
 }
 
-/* Charts Grid */
+/* Charts Grid - Mejoras de responsive */
 .charts-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr;
@@ -330,6 +330,10 @@ body {
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
   border: 1px solid rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0; /* Evita desbordamiento por contenido */
 }
 
 .chart-box:hover {
@@ -342,11 +346,26 @@ body {
   font-weight: 700;
   margin-bottom: 16px;
   color: #1e293b;
+  flex-shrink: 0;
 }
 
+/* Wrapper flexible para los canvas */
 .chart-wrap {
   position: relative;
-  height: 280px;
+  flex: 1;
+  min-height: 250px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Asegurar que el canvas se ajuste sin desbordar */
+.chart-wrap canvas {
+  max-width: 100%;
+  height: auto !important;
+  width: 100% !important;
+  display: block;
 }
 
 /* Table */
@@ -500,13 +519,21 @@ tbody tr:hover {
   padding: 12px;
 }
 
-/* Responsive */
+/* ============================================= */
+/* MEJORAS DE RESPONSIVE PARA GRÁFICOS Y TABLAS */
+/* ============================================= */
+
 @media (max-width: 1100px) {
   .charts-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
+  /* El primer gráfico (scatter) ocupa ambas columnas */
   .charts-grid .chart-box:first-child {
     grid-column: span 2;
+  }
+  .chart-wrap {
+    min-height: 280px;
   }
 }
 
@@ -523,6 +550,7 @@ tbody tr:hover {
   }
   .charts-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   .charts-grid .chart-box:first-child {
     grid-column: span 1;
@@ -544,17 +572,27 @@ tbody tr:hover {
   .kpi-value {
     font-size: 32px;
   }
+  /* Altura más compacta para gráficos en móvil */
   .chart-wrap {
-    height: 220px;
+    min-height: 220px;
   }
   th, td {
     padding: 12px 10px;
   }
+  /* Ajuste de tooltips y badges */
+  .status-badge {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+  }
+  .progress-bar-container {
+    min-width: 80px;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
   .grid-kpis {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
   .brand .brand-badge {
     display: none;
@@ -567,6 +605,27 @@ tbody tr:hover {
     font-size: 11px;
     padding: 6px 12px;
   }
+  .chart-wrap {
+    min-height: 200px;
+  }
+  /* Ajustar gráfico de barras horizontal: etiquetas más pequeñas */
+  .chart-box h3 {
+    font-size: 0.9rem;
+  }
+  table {
+    min-width: 500px;
+  }
+  th, td {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
+  .progress-bar-container {
+    min-width: 70px;
+  }
+  .progress-value {
+    font-size: 0.7rem;
+    min-width: 35px;
+  }
 }
 
 /* Loader skeleton */
@@ -577,7 +636,7 @@ tbody tr:hover {
   border-radius: 8px;
 }
 
-/* Scrollbar */
+/* Scrollbar personalizada */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
